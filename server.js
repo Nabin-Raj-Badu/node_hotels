@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('./db'); // Make sure db.js connects to MongoDB
+require('dotenv').config();
 const bodyParser = require('body-parser');
 
 const MenuItem = require('./models/MenuItem');
@@ -8,6 +9,7 @@ const MenuItem = require('./models/MenuItem');
 const app = express();
 app.use(bodyParser.json()); // To parse JSON from request body
 
+const PORT = process.env.PORT || 3000;
 // ✅ Root route
 app.get('/', (req, res) => {
   res.send('Welcome to my hotel... How can I help you?');
@@ -27,6 +29,8 @@ const menuItemRoutes = require('./routes/menuItemRoutes');
 
 app.use('/person', personRoutes);
 app.use('/menu', menuItemRoutes);
+
+
 
 // ✅ Start server
 app.listen(3000, () => {
